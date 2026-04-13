@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "migrate": "node-pg-migrate",
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
