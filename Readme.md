@@ -1,1 +1,1 @@
-A little exercise Node.js web API to a PostgreSQL DB with Instagram like data
+A little exercise Node.js REST API to a PostgreSQL DB with Instagram like data
