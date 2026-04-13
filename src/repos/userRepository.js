@@ -33,6 +33,12 @@ class UserRepository {
 
         return rows.map(row => keysToCamelCase(row))[0];
     }
+
+    async count() {
+        const { rows } = await pool.query(`SELECT COUNT(*) FROM ${this.#tableName}`);
+
+        return rows[0].count; 
+    }
 }
 
 export default new UserRepository();
