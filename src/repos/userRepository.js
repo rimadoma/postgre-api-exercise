@@ -37,7 +37,7 @@ class UserRepository {
     async count() {
         const { rows } = await pool.query(`SELECT COUNT(*) FROM ${this.#tableName}`);
 
-        return rows[0].count; 
+        return parseInt(rows[0].count); 
     }
 }
 
