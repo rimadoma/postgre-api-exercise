@@ -3,7 +3,7 @@ import createApp from '../../src/app.js';
 import userRepo from '../../src/repos/userRepository.js';
 import { setupTestDb } from '../helpers/setupTestDb.js';
 
-setupTestDb();
+setupTestDb('test2');
 
 it('creates a user', async () => {
     const beforeCount = await userRepo.count();

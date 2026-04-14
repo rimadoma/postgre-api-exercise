@@ -12,6 +12,8 @@ A little exercise in creating a Node.js REST API to a PostgreSQL DB with Instagr
 # Testing
 * `npm install supertest`
 * Set the DATABASE_URL env var, e.g. `set DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/testdbname` on Windows CMD
-* Run migrations for your separate testdb `npm run migrate up`
+* Run migrations for your separate testdb `npm run migrate:test up`
 * Setup your Postgres config in the test .js files
 * npm test
+
+NB `--no-cache` Jest option is used to slow down test startup, making parallel race conditions reliably reproducible (before tests are isolated with schemas).
