@@ -1,4 +1,4 @@
-A little exercise in creating a Node.js REST API to a PostgreSQL DB with Instagram like data and testing that with parallel tests in Jest.
+A little exercise in creating a Node.js REST API to a PostgreSQL DB with Instagram-ish data. It's tested with fake integration tests written in Jest that illustrate problems in parallel testing.
 
 # Local dev
 * Node.js from https://nodejs.org/en/download/
@@ -10,10 +10,12 @@ A little exercise in creating a Node.js REST API to a PostgreSQL DB with Instagr
 * Run server at `localhost:3005` with `npm dev` -- uses `nodemon` so the server automatically restarts when changes are detected
 
 # Testing
+Annoyingly you can't programmatically run node-pg-migrate as the runner doesn't support ES modules yet. Have to do test migrations by hand (see below).
+
 * `npm install supertest`
+* Run migrations `npm run migrate -- up --schema test --create-schema` and same for `test2`, and `test3`
 * Set the DATABASE_URL env var, e.g. `set DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/testdbname` on Windows CMD
-* Run migrations for your separate testdb `npm run migrate:test up`
-* Setup your Postgres config in the test .js files
+* Setup your Postgres config in `setupTestDb.js`
 * npm test
 
 NB `--no-cache` Jest option is used to slow down test startup, making parallel race conditions reliably reproducible (before tests are isolated with schemas).

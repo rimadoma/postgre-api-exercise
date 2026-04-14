@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "migrate": "node-pg-migrate",
-    "migrate:test": "node-pg-migrate --schema test --create-schema",
     "start": "node index.js",
     "test": "node --experimental-vm-modules ./node_modules/jest-cli/bin/jest.js --no-cache"
   },

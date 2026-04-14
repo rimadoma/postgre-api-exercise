@@ -22,7 +22,9 @@ class Pool {
     }
 
     async close() {
-        this.#pool.end();
+        if (this.#pool) {
+            this.#pool.end();
+        }
     }
 
     async query(sql, params = []) {

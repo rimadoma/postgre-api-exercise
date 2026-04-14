@@ -12,6 +12,10 @@ export function setupTestDb(schema = 'test') {
         });
     });
 
+    beforeEach(() => {
+        pool.query(`DELETE FROM users`);
+    });
+
     afterAll(() => {
         return pool.close();
     });
