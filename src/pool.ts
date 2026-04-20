@@ -1,7 +1,7 @@
-import {Pool as PgPool} from 'pg';
+import { Pool as PgPool } from 'pg';
 
 class Pool {
-    #pool = null;
+    #pool: PgPool;
 
     async connect(options) {
         this.#pool = new PgPool(options);
@@ -16,6 +16,7 @@ class Pool {
             'SELECT 1 FROM pg_database WHERE datname = $1',
             [database]
         );
+
         if (rows.length === 0) {
             throw new Error(`Database "${database}" does not exist`);
         }
@@ -27,7 +28,7 @@ class Pool {
         }
     }
 
-    async query(sql, params = []) {
+    async query<T>(sql: string, params: any[] = []) {
         return this.#pool.query(sql, params);
     }
 }
