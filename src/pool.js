@@ -23,7 +23,7 @@ class Pool {
 
     async close() {
         if (this.#pool) {
-            this.#pool.end();
+            await this.#pool.end();
         }
     }
 

@@ -3,16 +3,15 @@ A little exercise in creating a Node.js REST API to a PostgreSQL DB with Instagr
 # Local dev
 * Node.js from https://nodejs.org/en/download/
 * `npm install node-pg-migrate pg` for PostGres migrations
-* `npm install express` for Web server (express) in index.js
+* `npm install fastify` for Web server (Fastify) in index.js
 * Set the DATABASE_URL env var, e.g. `set DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/dbname` on Windows CMD
 * Run migrations `npm run migrate up`
 * Setup your Postgres config in `index.js`
-* Run server at `localhost:3005` with `npm dev` -- uses `nodemon` so the server automatically restarts when changes are detected
+* Run server at `localhost:3005` with `npm start`
 
 # Testing
 Annoyingly you can't programmatically run node-pg-migrate as the runner doesn't support ES modules yet. Have to do test migrations by hand (see below).
 
-* `npm install supertest`
 * Run migrations `npm run migrate -- up --schema test --create-schema` and same for `test2`, and `test3`
 * Set the DATABASE_URL env var, e.g. `set DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/testdbname` on Windows CMD
 * Setup your Postgres config in `setupTestDb.js`
