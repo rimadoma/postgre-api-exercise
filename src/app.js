@@ -1,12 +1,8 @@
-import express, { json } from 'express';
-import usersRouter from './routes/users.js';
+import Fastify from 'fastify';
+import usersRoutes from './routes/users.js';
 
 export default function createApp() {
-    const app = express();
-
-    // parse request body to json
-    app.use(json());
-    app.use(usersRouter);
-
-    return app;
+    const fastify = Fastify();
+    fastify.register(usersRoutes);
+    return fastify;
 }

@@ -1,45 +1,43 @@
-import { Router } from 'express';
 import userRepo from '../repos/userRepository.js'
 
-const router = Router();
+async function usersRoutes(fastify, _) {
+    fastify.get('/users', async (_request, _reqply) => {
+        return userRepo.find();
+    });
 
-router.get('/users', async (req, res) => {
-    const users = await userRepo.find();
+    fastify.get('/users/:id', async (request, reply) => {
+        const { id } = request.params;
 
-    res.send(users);
-});
+        const user = await userRepo.findById(id);
 
-router.get('/users/:id', async (req, res) => {
-    const { id } = req.params;
+        if (!user) return reply.code(404).send();
+        return user;
+    });
 
-    const user = await userRepo.findById(id);
+    fastify.post('/users', async (request, _reply) => {
+        const { username, bio } = request.body;
 
-    user ? res.send(user) : res.sendStatus(404);
-});
+        return userRepo.insert(username, bio);
+    });
 
-router.post('/users', async (req, res) => {
-    const { username, bio } = req.body;
+    fastify.put('/users/:id', async (request, reply) => {
+        const { id } = request.params;
+        const { username, bio } = request.body;
 
-    const user = await userRepo.insert(username, bio);
+        const user = await userRepo.update(id, username, bio);
 
-    res.send(user);
-});
+        if (!user) return reply.code(404).send();
+        return user;
+    });
 
-router.put('/users/:id', async (req, res) => {
-    const { id } = req.params;
-    const { username, bio } = req.body;
+    fastify.delete('/users/:id', async (request, reply) => {
+        const { id } = request.params;
 
-    const user = await userRepo.update(id, username, bio);
+        const user = await userRepo.delete(id);
 
-    user ? res.send(user) : res.sendStatus(404);
-});
+        if (!user) return reply.code(404).send();
+        return user;
+    });
+}
 
-router.delete('/users/:id', async (req, res) => {
-    const { id } = req.params;
-    
-    const user = await userRepo.delete(id);
-
-    user ? res.send(user) : res.sendStatus(404);
-});
-
-export default router;
+export default usersRoutes;
