@@ -1,4 +1,5 @@
-import pool from '../../src/pool.js';
+import pool from '../../src/pool.ts';
+import { beforeAll, beforeEach, afterAll } from 'vitest'
 
 export function setupTestDb(schema = 'test') {
     beforeAll(() => {

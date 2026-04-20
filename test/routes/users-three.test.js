@@ -1,6 +1,7 @@
-import createApp from '../../src/app.js';
-import userRepo from '../../src/repos/userRepository.js';
+import createApp from '../../src/app.ts';
+import userRepo from '../../src/repos/userRepository.ts';
 import { setupTestDb } from '../helpers/setupTestDb.js';
+import { it, expect } from 'vitest'
 
 setupTestDb('test3');
 
