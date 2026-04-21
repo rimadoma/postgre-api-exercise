@@ -7,7 +7,7 @@ interface UserBody {
 }
 
 // TODO Add JSON schemas for id
-async function usersRoutes(fastify : FastifyInstance, _) {
+async function usersRoutes(fastify: FastifyInstance, _: any) {
     fastify.get('/users', async (_request, _reply) => {
         return userRepo.find();
     });

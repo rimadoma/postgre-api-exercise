@@ -1,9 +1,9 @@
-import { Pool as PgPool } from 'pg';
+import { Pool as PgPool, type PoolClient, type QueryResultRow } from 'pg';
 
 class Pool {
-    #pool: PgPool;
+    #pool: PgPool | null = null;
 
-    async connect(options) {
+    async connect(options: any) {
         this.#pool = new PgPool(options);
 
         const client = await this.#pool.connect();
@@ -11,7 +11,7 @@ class Pool {
         client.release();
     }
 
-    async #checkDbExists(client, database) {
+    async #checkDbExists(client: PoolClient, database: string) {
         const { rows } = await client.query(
             'SELECT 1 FROM pg_database WHERE datname = $1',
             [database]
@@ -28,8 +28,11 @@ class Pool {
         }
     }
 
-    async query<T>(sql: string, params: any[] = []) {
-        return this.#pool.query(sql, params);
+    async query<T extends QueryResultRow>(sql: string, params: any[] = []) {
+        if (this.#pool) {
+            return this.#pool.query<T>(sql, params);
+        }
+        throw Error("Cap'n I cannae query withoot a pool");
     }
 }
 
