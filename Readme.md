@@ -5,7 +5,8 @@ A little exercise in creating a Node.js REST API to a PostgreSQL DB with Instagr
 * `npm install` to install dependencies
 * Set the DATABASE_URL env var, e.g. `set DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/dbname` on Windows CMD
 * Run migrations `npm run migrate up`
-* Setup your Postgres config in `index.js`
+* Setup your Postgres config in `index.ts`
+* Build with `npm run build`
 * Run server at `localhost:3005` with `npm start`
 
 # Testing
@@ -13,7 +14,5 @@ Annoyingly you can't programmatically run node-pg-migrate as the runner doesn't 
 
 * Run migrations `npm run migrate -- up --schema test --create-schema` and same for `test2`, and `test3`
 * Set the DATABASE_URL env var, e.g. `set DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/testdbname` on Windows CMD
-* Setup your Postgres config in `setupTestDb.js`
-* npm test
-
-NB `--no-cache` Jest option is used to slow down test startup, making parallel race conditions reliably reproducible (before tests are isolated with schemas).
+* Setup your Postgres config in `setupTestDb.ts`
+* Run tests with `npm test`
